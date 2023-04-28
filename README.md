@@ -14,7 +14,7 @@ The single window app displays a continiously rotating icon with the rotation de
 
 [main.py](main.py) is the entry application entry point of the application. To exexute the script, run
 ```console
-pi/test/project/location:~$ python3 main.py
+pi@raspberrypi:~ $ python3 main.py
 ```
 ### How does it work
 1. Read the image from [image/test_image.jpg](images/test_image.jpg) and save it as a NumPy array
@@ -28,7 +28,7 @@ pi/test/project/location:~$ python3 main.py
     3. Save the image obtained at step 4.2 into the shared Numpy array, created at step 2, so that it can be displayed with OpenCV Window.
 
 ## Notes
-The straight-forward way of creating the binary with [pyinstaller](https://pyinstaller.org/en/stable/) is not acceptable due to the known issues with [multiprocessing](https://docs.python.org/3/library/multiprocessing.html), see [#4110](https://github.com/pyinstaller/pyinstaller/issues/4110), [#4159](https://github.com/pyinstaller/pyinstaller/issues/4159), [#4190](https://github.com/pyinstaller/pyinstaller/issues/4190). 
+The straight-forward way of creating the binary with [pyinstaller](https://pyinstaller.org/en/stable/) is not acceptable due to the known issue with [multiprocessing](https://docs.python.org/3/library/multiprocessing.html), see [#4110](https://github.com/pyinstaller/pyinstaller/issues/4110), [#4159](https://github.com/pyinstaller/pyinstaller/issues/4159), [#4190](https://github.com/pyinstaller/pyinstaller/issues/4190). The issue can be reproduced with this project:
 ![](demo/pyinstaller_issue.gif)
 
 Using of [cython](https://cython.org/)-alike packages or cython-pyinstaller combination is more preferable in terms of reverse-engineering protection. 
