@@ -12,20 +12,20 @@ The recommened test project is available within this repository. It is simple ye
 The single window app displays a continiously rotating icon with the rotation degrees counter in the center:
 ![](demo/python_execution.gif)
 
-[main.py](main.py) is the entry application entry point of the application. To exexute the script, run
+[main.py](main.py) is the entry point of the application. To exexute the script, run
 ```console
 pi@raspberrypi:~ $ python3 main.py
 ```
 ### How does it work
 1. Read the image from [image/test_image.jpg](images/test_image.jpg) and save it as a NumPy array
 2. Copy the previously created NumPy array and write it into [multiprocessing.shared_memory](https://docs.python.org/3/library/multiprocessing.shared_memory.html), so that its state could be shared among processes. See [shared/uint8_rgb_matrix.py](shared/uint8_rgb_matrix.py) for implementation.
-3. Start a separate process, that uses [OpenCV window](opencv/window/window.py) to display the image from the shared NumPy array, created at step 2.
+3. Start a separate process, that uses [OpenCV window](opencv/window/window.py) to display the image from the shared NumPy array.
 4. In the main process:
     
     0. Exit if ESC key was pressed 
     1. [Rotate image](opencv/image_rotation/image_rotation.py) at the current angle in a separate thread
-    2. Simultaneously, [put text](opencv/put_text/put_text.py) with the current angle counter in the center of the previously rotated image.
-    3. Save the image obtained at step 4.2 into the shared Numpy array, created at step 2, so that it can be displayed with OpenCV Window.
+    2. Simultaneously, [put text](opencv/put_text/put_text.py) with the angle counter state in the center of the previously rotated image.
+    3. Save the image obtained at step 4.2 into the shared Numpy array, so that it can be displayed with OpenCV Window.
 
 ## Notes
 The straight-forward way of creating the binary with [pyinstaller](https://pyinstaller.org/en/stable/) is not acceptable due to the known issue with [multiprocessing](https://docs.python.org/3/library/multiprocessing.html), see [#4110](https://github.com/pyinstaller/pyinstaller/issues/4110), [#4159](https://github.com/pyinstaller/pyinstaller/issues/4159), [#4190](https://github.com/pyinstaller/pyinstaller/issues/4190). The issue can be reproduced with this project:
